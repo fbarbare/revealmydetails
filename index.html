@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://www.revealmydetails.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reveal My Details</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; font-weight: 100; }
+      body { background: #f4f8fc; font: 20px sans-serif; text-align: center; color: #536273; }
+      header { padding: 40px 40px 80px; background: #9cb3ca; }
+      h1, h2 { margin-bottom: 20px; }
+      h2 { font-size: inherit; }
+      form { max-width: 770px; margin: -40px auto 0; padding: 40px; background: #fff; text-align: left; }
+      input { display: block; width: 100%; margin-bottom: 20px; padding: 6px 10px; border-width: 0 0 1px 0; font-size: inherit; }
+      .question { position: relative; margin-bottom: 20px; }
+      .options { list-style: none; }
+      .options li { position: relative; font-size: 14px; }
+      .options li:last-child { margin-left: 30px; }
+      .options input { display: inline-block; width: calc(100% - 65px); }
+      .options input[type="radio"] { display: none; }
+      .options input[type="radio"] ~ label { position: relative; cursor: pointer; }
+      .options input[type="radio"] ~ label:before { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; text-align: center; content: "X"; color: red; }
+      .options input[type="radio"]:checked ~ label:before { content: "\2714"; color: green; }
+      .circle { display: inline-block; width: 20px; height: 20px; margin: 0 10px 0 30px; border: 3px solid #bdbdbd; border-radius: 50%; }
+      .circle:hover {}
+      .remove { position: absolute; right: 0; top: 0; font-size: 20px; cursor: pointer; }
+      .remove:hover { color: #000; }
+      .options .remove { display: none; }
+      .options li:nth-last-child(2) .remove { display: block; }
+      .btn { border: none; background: none; font-size: inherit; color: #bdbdbd; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Reveal your contact details only to relevant offers!</h1>
+    </header>
+    <form>
+      <h2>My details</h2>
+      <input type="text" name="phone" placeholder="Phone number">
+      <input type="email" name="email" placeholder="Email">
+      <h2>My questions</h2>
+      <div id="questions">
+        <div class="question">
+          <input type="text" name="question1" placeholder="Untitled Question 1">
+          <ul class="options">
+            <li>
+              <input id="question1option1" type="radio" name="question1" value="option1">
+              <label for="question1option1" class="circle"></label>
+              <input type="text" name="option1" placeholder="Option 1">
+            </li>
+            <li>
+              <input id="question1option2" type="radio" name="question1" value="option2">
+              <label for="question1option2" class="circle"></label>
+              <input type="text" name="option1" placeholder="Option 1">
+            </li>
+            <li>
+              <input id="question1option3" type="radio" name="question1" value="option3">
+              <label for="question1option3" class="circle"></label>
+              <input type="text" name="option1" placeholder="Option 1">
+            </li>
+            <li><button class="btn add-option" type="button">+ Add option</button></li>
+          </ul>
+        </div>
+        <button class="btn add-question" type="button">+ Add question</button>
+      </div>
+    </form>
+    <script>
+      function addOption(button) {
+        var parentElement = button.parentElement,
+            option = document.createElement('li');
+
+        option.innerHTML = `<span class="circle"></span><input type="text" name="option${parentElement.children.length}" placeholder="Option ${parentElement.children.length}"><span class="remove">&#215;</span>`;
+        parentElement.insertBefore(option, button);
+      }
+
+      function addQuestion(button) {
+        var parentElement = button.parentElement,
+            question = document.createElement('div');
+
+         question.innerHTML = `
+          <div class="question">
+            <input type="text" name="question${parentElement.children.length}" placeholder="Untitled Question ${parentElement.children.length}"><span class="remove">&#215;</span>
+            <ul class="options">
+              <li><span class="circle"></span><input type="text" name="option1" placeholder="Option 1"></li>
+              <li><button class="btn add-option" type="button">+ Add option</button></li>
+            </ul>
+          </div>
+        `;
+
+        parentElement.insertBefore(question, button);
+      }
+
+      document.body.addEventListener('click',  () => {
+        var target = event.target;
+
+        if (event.target.classList.contains('add-option')) {
+          addOption(event.target.parentElement);
+        } else if (event.target.classList.contains('add-question')) {
+          addQuestion(event.target);
+        } else if (event.target.classList.contains('remove')) {
+          target.parentElement.remove();
+        }
+      });
+    </script>
+  
+
+</body></html>
